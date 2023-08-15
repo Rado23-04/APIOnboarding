@@ -1,0 +1,88 @@
+openapi: '3.0.2'
+info:
+  title: Onboarding
+  description: STD22029
+  contact:
+    email: hei.rado.2@gmail.com
+  version: '1.0'
+servers:
+  - url: https://STD22029
+ 
+ paths:
+  /students:
+    get:
+      tags:
+        - "Student" 
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+               $ref: '#/components/schemas/StudentsResponse'
+        
+        '500': 
+          description: Internal Server Error
+
+/student:
+    post:
+      tags:
+        - "Student"
+      summary: Add user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentInput'
+        responses:
+        "200":
+        description: succes
+        
+        application/json:
+        schema:
+        $ref: '#/components/schemas/StudentsResponse'
+
+         '500':
+          description: Internal Server Error
+components:
+  schemas:
+    StudentsResponse:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: STD202200
+        name:
+          type: string
+          example: John
+        birthDate: 
+          type: string
+          format: date
+          example: 2003-10-05  
+    AddStudentsResponse:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: STD2202001
+        name:
+          type: string
+          example: Doe
+        birthDate: 
+          type: string
+          format: date
+          example: 2003-01-04
+    StudentInput:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: New ID
+        name:
+          type: string
+          example: NewStudent
+        birthDate: 
+          type: string
+          format: date
+          example: Birth date
