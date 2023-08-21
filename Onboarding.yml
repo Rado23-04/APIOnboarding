@@ -189,6 +189,9 @@ components:
         specialization:
           type: string
           example: Prog2    
+        heures:
+          type: string
+          example: 30 heures  
   
     TeacherInput:
       type: object
@@ -196,6 +199,9 @@ components:
         id:
           type: string
           example: TCH22000
+        heures:
+          type: string
+          example: 30 heures
         name:
           type: string
           example: Mr Lou
