@@ -4,47 +4,94 @@ info:
   description: STD22029
   contact:
     email: hei.rado.2@gmail.com
-  version: '1.0'
+  version: '1.0.0'
 servers:
-  - url: https://STD22029
+  - url: https://STD22029/v1
  
- paths:
+paths:
   /students:
     get:
       tags:
         - "Student" 
+      summary:  all students
       responses:
         '200':
-          description: successful
+          description: successful 
           content:
             application/json:
               schema:
                $ref: '#/components/schemas/StudentsResponse'
         
         '500': 
-          description: Internal Server Error
+          description:  Server Error
 
-/student:
+
+ 
     post:
       tags:
         - "Student"
-      summary: Add user
+      summary: Add Student 
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/StudentInput'
-        responses:
-        "200":
-        description: succes
-        
-        application/json:
-        schema:
-        $ref: '#/components/schemas/StudentsResponse'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddStudentsResponse'
 
-         '500':
-          description: Internal Server Error
+        '500':
+          description:  Server Error
+    put:
+      tags:
+        - "Student"
+      summary: Update Student
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          description: The ID of the student to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentInput'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentsResponse'
+
+        '500':
+          description:  Server Error
+
+    delete:
+      tags:
+        - "Student"
+      summary: Delete Student
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          description: the student to delete
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No content
+          
+        '500':
+          description: Server Error  
 components:
   schemas:
     StudentsResponse:
@@ -52,27 +99,27 @@ components:
       properties:
         id: 
           type: string
-          example: STD202200
-        name:
-          type: string
-          example: John
-        birthDate: 
-          type: string
-          format: date
-          example: 2003-10-05  
-    AddStudentsResponse:
-      type: object
-      properties:
-        id: 
-          type: string
-          example: STD2202001
+          example: STD22000
         name:
           type: string
           example: Doe
         birthDate: 
           type: string
           format: date
-          example: 2003-01-04
+          example: 2000-12-20  
+    AddStudentsResponse:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: STD22011
+        name:
+          type: string
+          example: John
+        birthDate: 
+          type: string
+          format: date
+          example: 2001-02-15
     StudentInput:
       type: object
       properties:
