@@ -133,3 +133,57 @@ components:
           type: string
           format: date
           example: Birth date
+    TeachersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TeacherResponse'
+
+    TeacherResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: TCH22000
+        name:
+          type: string
+          example: Mr Toky
+        specialization:
+          type: string
+          example: Prog2    
+/Teachers:
+    get:
+      tags:
+        - "Teacher"
+      summary: Tous les enseignants
+      responses:
+        '200':
+          description: Réussi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeachersResponse'
+
+        '500':
+          description: Erreur du serveur
+
+    post:
+      tags:
+        - "Teacher"
+      summary: Ajouter un enseignant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherInput'
+      responses:
+        '200':
+          description: Réussi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherResponse'
+
+        '500':
+          description: Erreur du serveur
+
